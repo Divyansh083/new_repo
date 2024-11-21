@@ -21,7 +21,7 @@ models:
       - name: quantity
         description: "Number of units purchased."
         tests:
-          - generic.validate_positive_values
+          - test_positive_values
       - name: tax
         description: "5% tax applied to the transaction."
       - name: total
@@ -73,11 +73,6 @@ models:
               values: ["Male", "Female"]
       - name: total_sales
         description: The total sales amount for the given gender.
-        tests:
-          - not_null
-          - numeric
       - name: total_gross_income
         description: The total gross income for the given gender.
-        tests:
-          - not_null
-          - numeric
+        

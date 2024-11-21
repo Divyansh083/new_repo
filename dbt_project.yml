@@ -8,8 +8,6 @@ version: "1.0.0"
 profile: "div_dbt_proj"
 
 # These configurations specify where dbt should look for different types of files.
-# The `model-paths` config, for example, states that models in this project can be
-# found in the "models/" directory. You probably won't need to change these!
 model-paths: ["models"]
 analysis-paths: ["analyses"]
 test-paths: ["tests"]
@@ -22,14 +20,20 @@ clean-targets: # directories to be removed by `dbt clean`
   - "dbt_packages"
 
 # Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
-
 models:
   div_dbt_proj:
+    # Default grants for all models in the project
+    +grants:
+      select: ["NEERAJ"] # SYSADMIN can view data; PUBLIC for limited access
+       # ORGADMIN can handle data insertions
     analytics:
+      # Specific configurations for models in the analytics folder
       daily_sales_by_branch:
-        +materialized: table # Materialize as a table
+        +materialized: table
       average_ratings_by_branch:
-        +materialized: table # Materialize as a table
+        +materialized: table
       sales_and_gross_income_by_gender:
-        +materialized: table # Materialize as a table
+        +materialized: table
+
+tests:
+  +store_failures: true

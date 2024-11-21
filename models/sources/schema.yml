@@ -1,0 +1,43 @@
+version: 2
+
+sources:
+  - name: PUBLIC
+    description: "Raw sales data loaded from the transactional system."
+    tables:
+      - name: DIVTABLE
+        description: "Table containing raw sales transactions from January 2019 to March 2019."
+        columns:
+          - name: invoice_id
+            description: "Unique identifier for each sales transaction."
+          - name: branch
+            description: "Branch where the transaction occurred (A, B, or C)."
+          - name: city
+            description: "City location of the branch."
+          - name: customer_type
+            description: "Type of customer (Member or Normal)."
+          - name: gender
+            description: "Gender of the customer."
+          - name: product_line
+            description: "Product category."
+          - name: unit_price
+            description: "Price of each product in dollars."
+          - name: quantity
+            description: "Number of units purchased."
+          - name: tax
+            description: "5% tax applied to the transaction."
+          - name: total
+            description: "Total transaction value including tax."
+          - name: date
+            description: "Date of the transaction."
+          - name: time
+            description: "Time of the transaction."
+          - name: payment
+            description: "Payment method used by the customer."
+          - name: cogs
+            description: "Cost of goods sold."
+          - name: gross_margin_percentage
+            description: "Gross margin percentage."
+          - name: gross_income
+            description: "Gross income from the transaction."
+          - name: rating
+            description: "Customer rating of their shopping experience (1-10)."

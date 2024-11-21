@@ -1,0 +1,83 @@
+version: 2
+
+models:
+  - name: stg_sales
+    description: "Staging model that cleans and standardizes raw sales data."
+    columns:
+      - name: invoice_id
+        description: "Unique identifier for each sales transaction."
+      - name: branch
+        description: "Branch where the transaction occurred (A, B, or C)."
+      - name: city
+        description: "City location of the branch."
+      - name: customer_type
+        description: "Type of customer (Member or Normal)."
+      - name: gender
+        description: "Gender of the customer."
+      - name: product_line
+        description: "Product category."
+      - name: unit_price
+        description: "Price of each product in dollars."
+      - name: quantity
+        description: "Number of units purchased."
+        tests:
+          - generic.validate_positive_values
+      - name: tax
+        description: "5% tax applied to the transaction."
+      - name: total
+        description: "Total transaction value including tax."
+      - name: purchase_date
+        description: "Date of the transaction."
+      - name: purchase_time
+        description: "Time of the transaction."
+      - name: payment
+        description: "Payment method used by the customer."
+      - name: cogs
+        description: "Cost of goods sold."
+      - name: gross_margin_percentage
+        description: "Gross margin percentage."
+      - name: gross_income
+        description: "Gross income from the transaction."
+      - name: rating
+        description: "Customer rating of their shopping experience (1-10)."
+
+  - name: daily_sales_by_branch
+    description: "Aggregated daily total sales and gross income by branch."
+    columns:
+      - name: branch
+        description: "Branch where the transactions occurred (A, B, or C)."
+      - name: purchase_date
+        description: "Date of the transactions."
+      - name: daily_total_sales
+        description: "Total sales revenue for the branch on a specific day."
+      - name: daily_gross_income
+        description: "Gross income for the branch on a specific day."
+
+  - name: average_ratings_by_branch
+    description: "Model calculating the average customer rating per branch."
+    columns:
+      - name: branch
+        description: "Branch where the transactions occurred (A, B, or C)."
+      - name: average_rating
+        description: "Average customer rating for the branch."
+
+  - name: sales_and_gross_income_by_gender
+    description: Aggregates total sales and total gross income by gender from the `stg_sales` model.
+    columns:
+      - name: GENDER
+        description: The gender of the customer.
+        tests:
+          - not_null
+          - unique
+          - accepted_values:
+              values: ["Male", "Female"]
+      - name: total_sales
+        description: The total sales amount for the given gender.
+        tests:
+          - not_null
+          - numeric
+      - name: total_gross_income
+        description: The total gross income for the given gender.
+        tests:
+          - not_null
+          - numeric
